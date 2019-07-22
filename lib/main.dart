@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'lazyNameListing.dart';
+import 'quiz/quiz.dart';
+// import 'names/lazyNameListing.dart';
 
 
 void main() => runApp(MyApp());
@@ -9,11 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title: 'Gerador de Nome',
+      title: 'App Tutorial',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.blueAccent
       ),
-      home:  RandomWords(),
+      home:  Quiz(),
+      // home:  RandomWords(),
+
     );
   }
 }

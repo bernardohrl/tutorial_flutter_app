@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+
+// Código Main.dart para usar esta lista.
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+
+//     return MaterialApp(
+//       title: 'Gerador de Nome',
+//       theme: ThemeData(
+//         primaryColor: Colors.blueAccent,
+//       ),
+//       home:  RandomWords(),
+//     );
+//   }
+// }
+
+
+
+
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final Set<WordPair> _saved = Set<WordPair>();
@@ -12,6 +31,7 @@ class RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: Text('Gerador de Nome de StartUps'),
         actions: <Widget>[
+          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ], 
       ),
