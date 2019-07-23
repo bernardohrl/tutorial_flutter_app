@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './selector.dart';
+import './initial_page.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,10 +14,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blueAccent
       ),
       home:  Scaffold(
-        appBar: AppBar(
-          title: Text('Poupex'),
-        ),
-          body: Selector()
+          body: InitialPage()
         )
     );
   }
