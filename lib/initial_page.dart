@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import './simulationSelector.dart';
 
 class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => goToSelector(),
+      onTap: () => goToSimulationSelector(context),
       child: container(),
     );
   }
@@ -34,6 +35,7 @@ class InitialPage extends StatelessWidget {
         ));
   }
 
+
   TextStyle textStyle(_color, _fontSize) {
     return TextStyle(
       color: _color,
@@ -42,7 +44,11 @@ class InitialPage extends StatelessWidget {
     );
   }
 
-  void goToSelector() {
-    print("Clicou!");
+
+  void goToSimulationSelector(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SimulationSelector()),
+    );
   }
 }
