@@ -48,7 +48,7 @@ class InitialPage extends StatelessWidget {
   void goToSimulationSelector(context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SimulationSelector()),
+      MaterialPageRoute(builder: (context) => SimuladorSelector()),
     );
   }
 }
