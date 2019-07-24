@@ -28,7 +28,7 @@ class InitialPage extends StatelessWidget {
               style: textStyle(Colors.white70, 25.00),
             ),
             Text(
-              'Simulador Poupex',
+              'Simulador Poupex!',
               style: textStyle(Colors.white, 38.00),
             ),
           ],

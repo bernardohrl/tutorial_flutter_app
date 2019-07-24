@@ -1,67 +1,31 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-Future<Post> fetchPost() async {
-  final response =
-      await http.get('https://jsonplaceholder.typicode.com/posts/1');
-
-  if (response.statusCode == 200) {
-    // If the call to the server was successful, parse the JSON.
-    return Post.fromJson(json.decode(response.body));
-  } else {
-    // If that call was not successful, throw an error.
-    throw Exception('Failed to load post');
-  }
-}
-
-class Post {
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
-
-  Post({this.userId, this.id, this.title, this.body});
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-      body: json['body'],
-    );
-  }
-}
+import 'package:http/io_client.dart';
+import 'dart:convert';
 
 class SimuladorSelector extends StatelessWidget {
-  final Future<Post> post = fetchPost();
+  final Future<http.Response> finalidades = getFinalidades();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: AppBar(
-        title: Text('Pegando dados'),
-      ),
-
       body: Center(
-        child: FutureBuilder<Post>(
-          future: post,
+        child: FutureBuilder<dynamic>(
+          future: finalidades,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data.body);
+              return returnBlocks(snapshot.data.body);
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
 
-            // By default, show a loading spinner.
             return CircularProgressIndicator();
           },
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(context);
@@ -69,7 +33,28 @@ class SimuladorSelector extends StatelessWidget {
         child: Icon(Icons.arrow_back),
         backgroundColor: Colors.amber,
       ),
-
     );
   }
+}
+
+Future<http.Response> getFinalidades() async {
+  HttpClient httpClient = new HttpClient()
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+
+  IOClient ioClient = new IOClient(httpClient);
+  final response = await ioClient
+      .get('https://simuladorimobiliarioapihml.hml.cloud.poupex/finalidades');
+
+  return response;
+}
+
+
+Widget returnBlocks(data) {
+  var parsedData = json.decode(data)[0];
+
+
+
+
+  return Text(parsedData['nome']);
 }
