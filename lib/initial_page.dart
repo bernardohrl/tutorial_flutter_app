@@ -15,7 +15,7 @@ class InitialPage extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background.png'),
+            image: AssetImage('assets/images/background.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -28,7 +28,7 @@ class InitialPage extends StatelessWidget {
               style: textStyle(Colors.white70, 25.00),
             ),
             Text(
-              'Simulador Poupex!',
+              'Simulador Poupex',
               style: textStyle(Colors.white, 38.00),
             ),
           ],
