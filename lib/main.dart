@@ -7,30 +7,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'App Tutorial',
-        theme: ThemeData(primaryColor: Colors.blueAccent),
-        home: HomeScreen(),
+      title: 'Simulador',
+      theme: ThemeData(primaryColor: Colors.blueAccent),
+      home: HomeScreen(),
     );
   }
 }
 
 
-
-
 class HomeScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'App Tutorial',
-        theme: ThemeData(primaryColor: Colors.blueAccent),
-        home: Scaffold(
-          body: GestureDetector(
-            onTap: () => goToSimulationSelector(context),
-            child: container(),
-          ),
-        ));
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () => _goToSimulationSelector(context),
+        child: container(),
+      ),
+    );
   }
+
 
   Container container() {
     return Container(
@@ -47,17 +42,18 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               'Bem vindo ao',
-              style: textStyle(Colors.white70, 25.00),
+              style: _textStyle(Colors.white70, 25.00),
             ),
             Text(
               'Simulador Poupex',
-              style: textStyle(Colors.white, 38.00),
+              style: _textStyle(Colors.white, 38.00),
             ),
           ],
         ));
   }
 
-  TextStyle textStyle(_color, _fontSize) {
+
+  TextStyle _textStyle(_color, _fontSize) {
     return TextStyle(
       color: _color,
       fontSize: _fontSize,
@@ -65,10 +61,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  void goToSimulationSelector(context) {
+
+  void _goToSimulationSelector(context) {
     Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SimuladorSelector()),
-    );
+        context, MaterialPageRoute(builder: (context) => SimuladorSelector()));
   }
 }

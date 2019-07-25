@@ -20,13 +20,13 @@ class Requester {
   }
 
   // FutureBuilder é utilizado para renderização de conteúdo e chamadas assíncronas
-  static FutureBuilder<dynamic> builder(data, callBackFunction) {
+  static FutureBuilder<dynamic> builder(data, callBackFunction, context) {
     return FutureBuilder<dynamic>(
       future: data,
       builder: (context, snapshot) {
         // Quando os dados chegam, 'generateGrid' é renderizado
         if (snapshot.hasData) {
-          return callBackFunction(snapshot.data.body);
+          return callBackFunction(snapshot.data.body, context);
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
