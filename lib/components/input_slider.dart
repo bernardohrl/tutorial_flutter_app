@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class InputSlider extends StatefulWidget {
   final double _sliderInitialValue, _min, _max;
   final String _label;
+  final TextEditingController _controller;
 
-  InputSlider(this._label, this._min, this._max, this._sliderInitialValue);
+  InputSlider(this._label, this._min, this._max, this._sliderInitialValue, this._controller);
 
   @override
-  _State createState() => _State(_label, _min, _max, _sliderInitialValue);
+  _State createState() => _State(_label, _min, _max, _sliderInitialValue, _controller);
 
 }
 
@@ -16,13 +17,13 @@ class InputSlider extends StatefulWidget {
 class _State extends State<InputSlider> {
   double _sliderValue, _min, _max;
   String _label = "";
-  var textController = new TextEditingController();
+  TextEditingController _controller;
 
-  _State(this._label, this._min, this._max, this._sliderValue);
+  _State(this._label, this._min, this._max, this._sliderValue, this._controller);
 
   @override
   Widget build(BuildContext context) {
-    textController.text = (_sliderValue).round().toString();
+    _controller.text = (_sliderValue).round().toString();
 
     return Container(
       padding: EdgeInsets.all(30.0),
@@ -31,7 +32,7 @@ class _State extends State<InputSlider> {
           children: <Widget>[
             Text(_label),
             TextField(
-              controller: textController,
+              controller: _controller,
               keyboardType: TextInputType.number,
               onChanged: _validateTextField,
               // textAlign: TextAlign.center,
@@ -52,7 +53,7 @@ class _State extends State<InputSlider> {
 
   void _sliderChanged(double value) {
       setState(() => _sliderValue = value);
-      textController.text = (_sliderValue).round().toString();
+      _controller.text = (_sliderValue).round().toString();
   }
 
 
@@ -61,9 +62,9 @@ class _State extends State<InputSlider> {
     var min = (_min).round().toString();
 
     if(int.parse(value) > int.parse(max)) 
-      textController.text = max;
+      _controller.text = max;
 
     if(int.parse(value) < int.parse(min))
-      textController.text = min;
+      _controller.text = min;
   }
 }
