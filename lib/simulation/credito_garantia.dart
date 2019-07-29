@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/input_slider.dart';
+import './listar_condicoes.dart';
 
 class CreditoGarantia extends StatefulWidget {
   @override
@@ -7,13 +8,33 @@ class CreditoGarantia extends StatefulWidget {
 }
 
 class _State extends State<CreditoGarantia> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Crédito com Garantia Imobiliária'),
       ),
-      body: InputSlider(),
+      body: Column(
+        children: <Widget>[
+          InputSlider(
+              "De quantos você precisa?", 1000.0, 1500000.0, 100000.0),
+          InputSlider(
+              "Em quantos meses para pagar?", 10.0, 240.0, 100.0),
+          RaisedButton(
+            onPressed: () => _goToListarCondicoes(context),
+            child: const Text('Listar Condições', style: TextStyle(fontSize: 20)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _goToListarCondicoes(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ListarCondicoes())
     );
   }
 }

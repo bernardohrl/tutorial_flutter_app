@@ -1,43 +1,35 @@
 import 'package:flutter/material.dart';
 
 class InputSlider extends StatefulWidget {
+  final double _sliderInitialValue, _min, _max;
+  final String _label;
+
+  InputSlider(this._label, this._min, this._max, this._sliderInitialValue);
+
   @override
-  _State createState() => _State();
+  _State createState() => _State(_label, _min, _max, _sliderInitialValue);
+
 }
 
+
+
 class _State extends State<InputSlider> {
-  double _sliderValue = 0.1;
-  final double _min = 0.001;
-  final double _max = 0.240;
+  double _sliderValue, _min, _max;
+  String _label = "";
   var textController = new TextEditingController();
 
-  void _sliderChanged(double value) {
-      setState(() => _sliderValue = value);
-      textController.text = (_sliderValue * 1000).round().toString();
-  }
-
-
-  void _validateTextField(String value) {
-    var max = (_max * 1000).round().toString();
-    var min = (_min * 1000).round().toString();
-
-    if(int.parse(value) > int.parse(max)) 
-      textController.text = max;
-
-    if(int.parse(value) < int.parse(min))
-      textController.text = min;
-  }
+  _State(this._label, this._min, this._max, this._sliderValue);
 
   @override
   Widget build(BuildContext context) {
-    textController.text = (_sliderValue * 1000).round().toString();
+    textController.text = (_sliderValue).round().toString();
 
     return Container(
       padding: EdgeInsets.all(30.0),
       child: Center(
         child: Column(
           children: <Widget>[
-            Text('Em quantos meses para pagar?'),
+            Text(_label),
             TextField(
               controller: textController,
               keyboardType: TextInputType.number,
@@ -54,5 +46,24 @@ class _State extends State<InputSlider> {
         ),
       ),
     );
+  }
+
+
+
+  void _sliderChanged(double value) {
+      setState(() => _sliderValue = value);
+      textController.text = (_sliderValue).round().toString();
+  }
+
+
+  void _validateTextField(String value) {
+    var max = (_max).round().toString();
+    var min = (_min).round().toString();
+
+    if(int.parse(value) > int.parse(max)) 
+      textController.text = max;
+
+    if(int.parse(value) < int.parse(min))
+      textController.text = min;
   }
 }
