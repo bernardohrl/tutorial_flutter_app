@@ -3,13 +3,20 @@ import '../components/input_slider.dart';
 import './listar_condicoes.dart';
 
 class CreditoGarantia extends StatefulWidget {
+  final String _idFinalidade;
+  CreditoGarantia(this._idFinalidade);
+
   @override
-  _State createState() => new _State();
+  _State createState() => new _State(_idFinalidade);
 }
 
 class _State extends State<CreditoGarantia> {
   TextEditingController controllerValor = new TextEditingController();
   TextEditingController controllerMeses = new TextEditingController();
+  String _idFinalidade;
+
+  _State(this._idFinalidade);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +40,12 @@ class _State extends State<CreditoGarantia> {
   }
 
   void _goToListarCondicoes(context) {
-    String valor = controllerValor.text;
-    String meses = controllerMeses.text;
+    String _valor = controllerValor.text;
+    String _meses = controllerMeses.text;
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ListarCondicoes())
+      MaterialPageRoute(builder: (context) => ListarCondicoes(_idFinalidade, _valor, _meses))
     );
   }
 }

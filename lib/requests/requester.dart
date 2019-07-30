@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
@@ -26,7 +27,8 @@ class Requester {
       builder: (context, snapshot) {
         // Quando os dados chegam, 'generateGrid' é renderizado
         if (snapshot.hasData) {
-          return callBackFunction(snapshot.data.body, context);
+          var data = json.decode(snapshot.data.body);
+          return callBackFunction(data, context);
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }

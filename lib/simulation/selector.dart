@@ -30,55 +30,58 @@ class SimuladorSelector extends StatelessWidget {
     );
   }
 
+
   Widget _generateGrid(data, context) {
-    var finalidades = json.decode(data);
+    // print(data);
+    // var finalidades = json.decode(data);
+    var finalidades = data;
 
     return GridView.count(
       crossAxisCount: 2,
       childAspectRatio: (20.0 / 20.0),
       shrinkWrap: true,
       children: List.generate(6, (index) {
-        return InkWell(
-          // InkWell serve apenas para efeito de clique do Material
-          onTap: () => _goToSimulation(context),
-          child: Container(
-            decoration: BoxDecoration(border: Border.all()),
-            child: _generateGridBlocks(finalidades[index]),
-          ),
+        return Container(
+          decoration: BoxDecoration(border: Border.all()),
+          child: _generateGridBlocks(finalidades[index], context),
         );
       }),
     );
   }
 
-  Widget _generateGridBlocks(finalidade) {
+  Widget _generateGridBlocks(finalidade, context) {
     // print(finalidade);
     final imagePath = 'assets/images/' + finalidade['icone'];
 
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 80.0,
-          margin: const EdgeInsets.symmetric(
-            vertical: 30.0,
-            // horizontal: 20.0,
+    return GestureDetector(
+      onTap: () => _goToSimulation(context, finalidade['id']),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 80.0,
+            margin: const EdgeInsets.symmetric(
+              vertical: 30.0,
+            ),
+            child: SvgPicture.asset(imagePath),
           ),
-          child: SvgPicture.asset(imagePath),
-        ),
-        Text(finalidade['nome'],
+          Text(
+            finalidade['nome'],
             style: TextStyle(
               color: Color(0xFF013F88),
               fontSize: 18.00,
               fontWeight: FontWeight.bold,
-            )),
-      ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
+  void _goToSimulation(context, idFinalidade) {
+    // Como tem apenas CréditoGarantia, o IdFinalidade é sempre 6.
+    String _idFinalidade = idFinalidade.toString(); 
 
-  void _goToSimulation(context) {
     Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CreditoGarantia())
-    );
+        context, MaterialPageRoute(builder: (context) => CreditoGarantia(_idFinalidade)));
   }
 }
