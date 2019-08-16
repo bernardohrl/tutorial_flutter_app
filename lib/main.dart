@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'quiz/quiz.dart';
+import 'package:my_app/requests/base.dart';
+// import 'quiz/quiz.dart';
 // import 'names/lazyNameListing.dart';
 
 
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueAccent
       ),
-      home:  Quiz(),
+      home: Startpage(),
+      // home:  Quiz(),
       // home:  RandomWords(),
 
     );
